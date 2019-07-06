@@ -5,12 +5,14 @@ window.onload = () => {
     navigator.serviceWorker
              .register('./sw.js');
   }
-}
+
 
 if ('DeviceOrientationEvent' in window) {
   window.addEventListener('deviceorientation', deviceOrientationHandler, false);
 } else {
   document.getElementById('logoContainer').innerText = 'Device Orientation API not supported.';
+}
+
 }
 
 function deviceOrientationHandler (eventData) {
@@ -27,3 +29,5 @@ function deviceOrientationHandler (eventData) {
   logo.style.MozTransform = "rotate(" + tiltLR + "deg)";
   logo.style.transform = "rotate(" + tiltLR + "deg) rotate3d(1,0,0, " + (tiltFB * -1) + "deg)";
 }
+
+
