@@ -148,6 +148,62 @@
 
    <script src="js/device.js"></script>
 
+   <script>
+      if (isDeviceOrientationSupported(deviceOrientationSupported)) {
+         document.getElementById('do-info').classList.remove('hidden');
+      } else {
+         document.getElementById('do-unsupported').classList.remove('hidden');
+      }
+
+      if (isDeviceMotionSupported(deviceMotionSupported)) {
+         document.getElementById('dm-info').classList.remove('hidden');
+      } else {
+         document.getElementById('dm-unsupported').classList.remove('hidden');
+      }
+
+      if (!(doesCompassNeedsCalibration(
+            function (event) {
+               alert('Compass needs calibrating! Wave your device in a figure-eight motion');
+            }
+         )))
+         document.getElementById('cnc-unsupported').classList.remove('hidden');
+
+      function deviceOrientationSupported(event) {
+         document.getElementById('cube').style.webkitTransform =
+            document.getElementById('cube').style.transform =
+            'rotateX(' + event.beta + 'deg) ' +
+            'rotateY(' + event.gamma + 'deg) ' +
+            'rotateZ(' + event.alpha + 'deg)';
+
+         document.getElementById('beta').innerHTML = Math.round(event.beta);
+         document.getElementById('gamma').innerHTML = Math.round(event.gamma);
+         document.getElementById('alpha').innerHTML = Math.round(event.alpha);
+         document.getElementById('is-absolute').innerHTML = event.absolute ? "true" : "false";
+      }
+
+      function deviceMotionSupported(event) {
+         document.getElementById('acceleration-x').innerHTML = Math.round(event.acceleration.x * 100) / 100;
+         document.getElementById('acceleration-y').innerHTML = Math.round(event.acceleration.y * 100) / 100;
+         document.getElementById('acceleration-z').innerHTML = Math.round(event.acceleration.z * 100) / 100;
+
+         document.getElementById('acceleration-including-gravity-x').innerHTML =
+            Math.round(event.accelerationIncludingGravity.x * 100) / 100;
+         document.getElementById('acceleration-including-gravity-y').innerHTML =
+            Math.round(event.accelerationIncludingGravity.y * 100) / 100;
+         document.getElementById('acceleration-including-gravity-z').innerHTML =
+            Math.round(event.accelerationIncludingGravity.z * 100) / 100;
+
+         document.getElementById('rotation-rate-beta').innerHTML = Math.round(event.rotationRate.beta * 100) /
+            100;
+         document.getElementById('rotation-rate-gamma').innerHTML = Math.round(event.rotationRate.gamma * 100) /
+            100;
+         document.getElementById('rotation-rate-alpha').innerHTML = Math.round(event.rotationRate.alpha * 100) /
+            100;
+
+         document.getElementById('interval').innerHTML = event.interval;
+      }
+   </script>
+
 </body>
 
 </html>
