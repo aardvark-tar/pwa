@@ -8,12 +8,25 @@ function isDeviceOrientationSupported(deviceOrientationEventListener) {
 }
 
 function isDeviceMotionSupported(deviceMotionEventListener) {
-   if ('ondevicemotion' in window) {
-      window.addEventListener('devicemotion', deviceMotionEventListener);
-      return true;
-   } else {
-      return false;
-   }
+   // feature detect
+    if (typeof DeviceMotionEvent.requestPermission === 'function') {
+       DeviceMotionEvent.requestPermission()
+          .then(permissionState => {
+          if (permissionState === 'granted') {
+             window.addEventListener('devicemotion', deviceMotionEventListener);
+             return true;
+          }
+          })
+          .catch(console.error);
+    } else {
+       // handle regular non iOS 13+ devices
+       if ('ondevicemotion' in window) {
+          window.addEventListener('devicemotion', deviceMotionEventListener);
+          return true;
+       } else {
+         return false;
+       }
+    }
 }
 
 function doesCompassNeedsCalibration(compassNeedsCalibrationEventListener) {
