@@ -149,6 +149,10 @@
    <script src="js/device.js"></script>
 
    <script>
+      if (location.protocol != 'https:') {
+         location.href = 'https:' + window.location.href.substring(window.location.protocol.length);
+      }
+      
       if (isDeviceOrientationSupported(deviceOrientationSupported)) {
          document.getElementById('do-info').classList.remove('hidden');
       } else {
