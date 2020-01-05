@@ -1,10 +1,22 @@
 function isDeviceOrientationSupported(deviceOrientationEventListener) {
-   if ('ondeviceorientation' in window) {
-      window.addEventListener('deviceorientation', deviceOrientationEventListener);
-      return true;
+   if (typeof DeviceMotionEvent.requestPermission === 'function') {
+      // iOS 13+
+      DeviceOrientationEvent.requestPermission()
+         .then(response => {
+            if (response == 'granted') {
+               window.addEventListener('deviceorientation', deviceOrientationEventListener);
+               return true;
+            }
+         })
+         .catch(console.error)
    } else {
-      return false;
+      // non iOS 13+
+      if ('ondeviceorientation' in window) {
+         window.addEventListener('deviceorientation', deviceOrientationEventListener);
+         return true;
+      }
    }
+   return false;
 }
 
 function isDeviceMotionSupported(deviceMotionEventListener) {
