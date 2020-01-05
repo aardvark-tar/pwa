@@ -1,5 +1,5 @@
 function isDeviceOrientationSupported(deviceOrientationEventListener) {
-   if (typeof DeviceMotionEvent.requestPermission === 'function') {
+   if (typeof(DeviceOrientationEvent) !== 'undefined' && typeof(DeviceOrientationEvent.requestPermission) === 'function') {
       // iOS 13+
       DeviceOrientationEvent.requestPermission()
          .then(response => {
