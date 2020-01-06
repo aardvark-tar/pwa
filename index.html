@@ -74,7 +74,7 @@
 
 </head>
 
-<body>
+<body onload="checkSupportedAPI()">
 
    <div class="container">
       <h1 class="title">Hello World!</h1>
@@ -153,6 +153,9 @@
          location.href = 'https:' + window.location.href.substring(window.location.protocol.length);
       }
       
+function checkSupportedAPI()
+{
+
       if (isDeviceOrientationSupported(deviceOrientationSupported)) {
          document.getElementById('do-info').classList.remove('hidden');
       } else {
@@ -171,6 +174,8 @@
             }
          )))
          document.getElementById('cnc-unsupported').classList.remove('hidden');
+
+}
 
       function deviceOrientationSupported(event) {
          document.getElementById('cube').style.webkitTransform =
