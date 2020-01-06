@@ -6,8 +6,7 @@ function isDeviceOrientationSupported(deviceOrientationEventListener) {
             if (response == 'granted') {
                window.addEventListener('deviceorientation', deviceOrientationEventListener);
                return true;
-            } else 
-return false;
+            }
          })
          .catch(console.error)
    } else {
