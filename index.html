@@ -155,29 +155,6 @@
          location.href = 'https:' + window.location.href.substring(window.location.protocol.length);
       }
       
-function checkSupportedAPI()
-{
-
-      if (isDeviceOrientationSupported(deviceOrientationSupported)) {
-         document.getElementById('do-info').classList.remove('hidden');
-      } else {
-         document.getElementById('do-unsupported').classList.remove('hidden');
-      }
-
-      if (isDeviceMotionSupported(deviceMotionSupported)) {
-         document.getElementById('dm-info').classList.remove('hidden');
-      } else {
-         document.getElementById('dm-unsupported').classList.remove('hidden');
-      }
-
-      if (!(doesCompassNeedsCalibration(
-            function (event) {
-               alert('Compass needs calibrating! Wave your device in a figure-eight motion');
-            }
-         )))
-         document.getElementById('cnc-unsupported').classList.remove('hidden');
-
-}
 
       function deviceOrientationSupported(event) {
          document.getElementById('cube').style.webkitTransform =
@@ -213,6 +190,31 @@ function checkSupportedAPI()
 
          document.getElementById('interval').innerHTML = event.interval;
       }
+
+function checkSupportedAPI()
+{
+
+      if (isDeviceOrientationSupported(deviceOrientationSupported)) {
+         document.getElementById('do-info').classList.remove('hidden');
+      } else {
+         document.getElementById('do-unsupported').classList.remove('hidden');
+      }
+
+      if (isDeviceMotionSupported(deviceMotionSupported)) {
+         document.getElementById('dm-info').classList.remove('hidden');
+      } else {
+         document.getElementById('dm-unsupported').classList.remove('hidden');
+      }
+
+      if (!(doesCompassNeedsCalibration(
+            function (event) {
+               alert('Compass needs calibrating! Wave your device in a figure-eight motion');
+            }
+         )))
+         document.getElementById('cnc-unsupported').classList.remove('hidden');
+
+}
+
    </script>
 
 </body>
