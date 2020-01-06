@@ -157,6 +157,9 @@
       
 
       function deviceOrientationSupported(event) {
+
+         document.getElementById('do-unsupported').classList.remove('hidden')
+
          document.getElementById('cube').style.webkitTransform =
             document.getElementById('cube').style.transform =
             'rotateX(' + event.beta + 'deg) ' +
@@ -170,6 +173,9 @@
       }
 
       function deviceMotionSupported(event) {
+
+document.getElementById('dm-unsupported').classList.remove('hidden');
+
          document.getElementById('acceleration-x').innerHTML = Math.round(event.acceleration.x * 100) / 100;
          document.getElementById('acceleration-y').innerHTML = Math.round(event.acceleration.y * 100) / 100;
          document.getElementById('acceleration-z').innerHTML = Math.round(event.acceleration.z * 100) / 100;
